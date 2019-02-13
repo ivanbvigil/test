@@ -1,5 +1,27 @@
 <!doctype html>
 <html lang="en">
+<style>
+.def {
+  background-color: #008CBA; 
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  height:30px;
+  width:100px;
+}
+
+.shade {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+</style>
 <head>
 
   	{% load staticfiles %}
@@ -12,6 +34,7 @@
 
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link href = "{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel = "stylesheet">
 	<style>
 		.bd-placeholder-img {
 			font-size: 1.125rem;
@@ -40,7 +63,9 @@
 					<ul class="navbar-nav ml-auto">
 						{% if user.is_authenticated %}
 							<li class="nav-item">
-								<a class="nav-link" href="javascript:{document.getElementById('logout').submit()}"> Log out</a>
+								<a class="nav-link" href="{% url 'create' %}"> <span class="oi oi-plus"></span> Add new!</a>
+							<li class="nav-item">
+								<a class="nav-link" href="javascript:{document.getElementById('logout').submit()}"> <span class="oi oi-account-logout"></span> Log out</a>
 							</li>
 							<form id="logout" method = "POST" action = "{% url 'logout' %}">
 								{% csrf_token %}
@@ -49,10 +74,10 @@
 
 						{% else %}
 							<li class="nav-item">
-								<a class="nav-link" href="{% url 'signup' %}"> Sign Up</a>
+								<a class="nav-link" href="{% url 'signup' %}"><span class="oi oi-action-redo"></span> Sign Up</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href= "{% url 'login' %}">Login</a>
+								<a class="nav-link" href= "{% url 'login' %}"><span class="oi oi-account-login"></span> Login</a>
 							</li>
 
 						{% endif %}

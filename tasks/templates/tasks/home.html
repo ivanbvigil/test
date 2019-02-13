@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-Home!
-
+{% for task in tasks.all %}
+<div class = "row pt-3" >
+	<div class = "col-2" onclick = "window.location = '{% url 'detail' task.id %}';" style = "cursor: pointer;">
+		<img src = "{{ task.image.url }}" class = "img-fluid" />
+	</div>
+	<div class = "col-7">
+		<a ><h5>{{ task.title}}</h5></a>
+		<p>{{ task.summary}}</p>
+	</div>
+	<div class = "col-3">
+		<a href = "javascript:{document.getElementById('state_change_home{{ task.id }}').submit()}">
+		<h10 style="color:MediumSeaGreen;"><button class = "def shade" ><span class="oi oi-loop-circular"></span>
+		{% if taks.state %}
+		{{ task.state }} 
+		{% else %}
+		{{ task.state }} 
+		{% endif %}
+		</spam></button>
+		</h10></a>
+	</div>
+</div>
+<form id = "state_change_home{{ task.id }}" method = "POST", action = "{% url 'state_change_home' task.id %}"> 
+	{% csrf_token %}
+	<input type = "hidden"/>
+</form>
+<hr />
+{% endfor %}
 {% endblock %}
