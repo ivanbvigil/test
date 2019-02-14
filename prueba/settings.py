@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap_modal_forms',
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
