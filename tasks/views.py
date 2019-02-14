@@ -13,7 +13,7 @@ def home(request):
 @login_required
 def create(request):
 	if request.method == 'POST':
-		if request.POST['title'] and request.POST['body'] and request.FILES['image']:
+		if request.POST['title'] and request.POST['body']  and request.FILES['image']:
 			task = Task ()
 			task.title = request.POST['title']
 			task.body =  request.POST['body']
@@ -60,8 +60,38 @@ def state_change_home(request, task_id):
 		task.save()
 		return redirect('/')
 
+@login_required
+def update(request, task_id):
+	task = get_object_or_404(Task, pk = task_id)
+	print('state init:', task.state)
+	return render(request, 'tasks/update.html', {'task' : task})
 
+@login_required
+def delete(request, task_id):
+	task = get_object_or_404(Task, pk = task_id)
+	task.delete()
+
+	return redirect('/')
+
+@login_required
+def update_submit(request, task_id):
 	
+	if request.method == 'POST':
+		if request.POST['title'] and request.POST['body']:
+			task = get_object_or_404(Task, pk = task_id)
+			task.title = request.POST['title']
+			task.body =  request.POST['body']
+			task.image = request.FILES['image']
+			task.pub_date = timezone.datetime.now()
+			task.state = 'Undone'
+			task.author = request.user
+			task.save()
+			print('url for image', task.image.url)
+			return redirect('/tasks/' + str(task.id))
+		else:
+			return render(request, 'tasks/update.html', {'error' : 'All files are required'})	
+	else:
+		print('inside method post')
+		return render(request, 'tasks/update.html', {'error' : 'All files are required'})
 
 
-	

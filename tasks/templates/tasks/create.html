@@ -7,7 +7,7 @@
 <br />
 {% endif %}
 <h1>Create new Task!</h1>
-<form method = "POST" action = "{% url 'create' %}" enctype = "multipart/form-data">
+<form method = "POST" action = "{% url 'create'%}" enctype = "multipart/form-data">
 	{% csrf_token %}
 	Title:
 	<br />
@@ -24,10 +24,6 @@
 	<br />
 	<input class = "btn btn-primary" type = "submit" value = "Add Task" />
 	<br />
-	
-
-
-
 </form>
 
 {% endblock %}

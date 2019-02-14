@@ -22,7 +22,7 @@
 				</h10>
 			</a>
 
-			<a href = "javascript:{document.getElementById('state_change').submit()}">
+			<a href = "javascript:{document.getElementById('update').submit()}">
 				<h10 style="color:MediumSeaGreen;"><button class = "def shade" ><span class="oi oi-loop-circular"></span>
 				{% if taks.state %}
 				{{ task.state }} 
@@ -33,7 +33,7 @@
 				</h10>
 			</a>
 			
-			<a href = "javascript:{document.getElementById('state_change').submit()}">
+			<a href = "javascript:{document.getElementById('delete').submit()}">
 				<h10 style="color:MediumSeaGreen;"><button class = "def shade" ><span class="oi oi-loop-circular"></span>
 				{% if taks.state %}
 				{{ task.state }} 
@@ -64,6 +64,14 @@
 
 
 <form id = "state_change" method = "POST", action = "{% url 'state_change' task.id %}"> 
+	{% csrf_token %}
+ 	<input type = "hidden"/>
+</form>
+<form id = "update" method = "POST", action = "{% url 'update' task.id %}"> 
+	{% csrf_token %}
+ 	<input type = "hidden"/>
+</form>
+<form id = "delete" method = "POST", action = "{% url 'delete' task.id %}"> 
 	{% csrf_token %}
  	<input type = "hidden"/>
 </form>
