@@ -63,6 +63,9 @@
 					<ul class="navbar-nav ml-auto">
 						{% if user.is_authenticated %}
 							<li class="nav-item">
+								<a class="nav-link disabled" href="#">Hi! {{ user }}</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="{% url 'create' %}"> <span class="oi oi-plus"></span> Add new!</a>
 							<li class="nav-item">
 								<a class="nav-link" href="javascript:{document.getElementById('logout').submit()}"> <span class="oi oi-account-logout"></span> Log out</a>
@@ -78,6 +81,7 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href= "{% url 'login' %}"><span class="oi oi-account-login"></span> Login</a>
+
 							</li>
 
 						{% endif %}
